@@ -2,6 +2,8 @@ package com.krakedev.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +25,24 @@ public class Conexion {
 			log.error("Error de conexion exitada" + e.getMessage());
 			throw new RuntimeException("No se pudo exitar", e);
 		}
+	}
+	
+	public static void cerrarConexiones(Connection con, PreparedStatement ps, ResultSet rs) {
+		
+		try {
+			if(con != null) {
+				con.close();
+			}
+			if(ps != null) {
+				ps.close();
+			}
+			if(rs != null) {
+				rs.close();
+			}
+		}catch(Exception e) {
+			
+		}
+		
 	}
 
 }
